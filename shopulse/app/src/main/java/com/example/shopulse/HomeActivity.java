@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.LayoutInflaterCompat;
 import androidx.navigation.NavController;
@@ -63,6 +64,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
         ProductsRef = FirebaseDatabase.getInstance().getReference().child("Products");
 
         Paper.init(this);
@@ -70,6 +72,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Home");
         setSupportActionBar(toolbar);
+
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -85,7 +88,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.syncState();
+
+        NavigationView navigationView =(NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
 
         //Fragment da kullanıcı adını database'den alıp resmin altına yazıyor.
@@ -100,16 +107,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
 
 
     }
@@ -149,12 +146,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
-        return true;
-    }
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -162,6 +154,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.home, menu);
+        return true;
+    }
+
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item)
@@ -174,6 +176,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
 
 
@@ -196,6 +200,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         else if (id == R.id.nav_settings)
         {
+            Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+            startActivity(intent);
 
         }
         else if (id == R.id.nav_logout)
