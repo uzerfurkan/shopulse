@@ -100,6 +100,7 @@ import io.paperdb.Paper;
                              loadingBar.dismiss();
 
                              Intent intent = new Intent(MainActivity.this,HomeActivity.class);
+                             Prevalent.currentOnlineUser = usersData;
                              startActivity(intent);
                          }
 
