@@ -119,7 +119,7 @@ public class SettingsActivity extends AppCompatActivity
         ref.child(Prevalent.currentOnlineUser.getPhone()).updateChildren(userMap);
 
 
-        startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
         Toast.makeText(SettingsActivity.this, "Profil Bilgileri Başarılı Güncellendi", Toast.LENGTH_SHORT).show();
         finish();
     }
@@ -220,7 +220,7 @@ public class SettingsActivity extends AppCompatActivity
 
                         progressDialog.dismiss();
 
-                        startActivity(new Intent(SettingsActivity.this, MainActivity.class));
+                        startActivity(new Intent(SettingsActivity.this, HomeActivity.class));
                         Toast.makeText(SettingsActivity.this, "Profil Bilgileri Başarılı Güncellendi", Toast.LENGTH_SHORT).show();
                         finish();
                     }
