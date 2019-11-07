@@ -1,11 +1,14 @@
 package com.example.shopulse;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.LayoutInflaterCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,13 +65,64 @@ public class AdminNewOrdersActivity extends AppCompatActivity
                 new FirebaseRecyclerAdapter<AdminOrders, AdminOrdersViewHolder>(options)
                 {
                     @Override
-                    protected void onBindViewHolder(@NonNull AdminOrdersViewHolder adminOrdersViewHolder, int i, @NonNull AdminOrders adminOrders)
+                    protected void onBindViewHolder(@NonNull AdminOrdersViewHolder adminOrdersViewHolder, final int i, @NonNull final AdminOrders adminOrders)
                     {
                         adminOrdersViewHolder.userName.setText("İsim: " + adminOrders.getName());
                         adminOrdersViewHolder.userPhoneNumber.setText("Telefon: " + adminOrders.getPhone());
                         adminOrdersViewHolder.userTotalPrice.setText("Toplam Fiyat = ₺ " + adminOrders.getTotalAmount());
                         adminOrdersViewHolder.userDatetime.setText("Sipariş Tarihi: " + adminOrders.getDate() + "" + adminOrders.getTime());
                         adminOrdersViewHolder.userShippingAddress.setText("Kargolanacak Adres: " + adminOrders.getAddress()+ ", " + adminOrders.getCity());
+
+                        adminOrdersViewHolder.ShowOrderBtn.setOnClickListener(new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                String uID = getRef(i).getKey();
+
+                                Intent intent = new Intent(AdminNewOrdersActivity.this, AdminUserProductsActivity.class);
+                                intent.putExtra("uid", uID);
+                                startActivity(intent);
+                            }
+                        });
+
+                        adminOrdersViewHolder.itemView.setOnClickListener(new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View v)
+                            {
+                                CharSequence options[] = new CharSequence[]
+                                        {
+                                                "Evet",
+                                                "Hayır"
+                                        };
+                                AlertDialog.Builder builder = new AlertDialog.Builder(AdminNewOrdersActivity.this);
+                                builder.setTitle("Verilmiş siparişi onaylıyor musunuz ? ");
+
+
+
+                                builder.setItems(options, new DialogInterface.OnClickListener()
+                                {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which)
+                                    {
+                                        if (which == 0)
+                                        {
+                                            String uID = getRef(i).getKey();
+
+                                            RemoverOrder(uID);
+                                        }
+                                        else
+                                        {
+                                            finish();
+                                        }
+                                    }
+                                });
+
+                                builder.show();
+                            }
+
+                        });
                     }
 
                     @NonNull
@@ -82,6 +136,8 @@ public class AdminNewOrdersActivity extends AppCompatActivity
         orderList.setAdapter(adapter);
         adapter.startListening();
     }
+
+
 
 
     public static class AdminOrdersViewHolder extends RecyclerView.ViewHolder
@@ -101,5 +157,11 @@ public class AdminNewOrdersActivity extends AppCompatActivity
             ShowOrderBtn = itemView.findViewById(R.id.show_all_products_btn);
 
         }
+    }
+
+
+    private void RemoverOrder(String uID)
+    {
+        orderRef.child(uID).removeValue();
     }
 }
