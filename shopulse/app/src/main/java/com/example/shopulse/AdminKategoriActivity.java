@@ -15,7 +15,7 @@ public class AdminKategoriActivity extends AppCompatActivity
     private ImageView gozluk, sapka, canta, ayakkabi;
     private ImageView kulaklik, laptop, saat, telefon;
 
-    private Button LogoutBtn, CheckOrdersBtn;
+    private Button LogoutBtn, CheckOrdersBtn, maintainProducsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -25,6 +25,20 @@ public class AdminKategoriActivity extends AppCompatActivity
 
         LogoutBtn = (Button) findViewById(R.id.admin_logout_btn);
         CheckOrdersBtn = (Button) findViewById(R.id.check_orders_btn);
+        maintainProducsBtn = (Button) findViewById(R.id.maintain_btn);
+
+
+
+        maintainProducsBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(AdminKategoriActivity.this, HomeActivity.class);
+                intent.putExtra("Admin", "Admin");
+                startActivity(intent);
+            }
+        });
 
         LogoutBtn.setOnClickListener(new View.OnClickListener()
         {
