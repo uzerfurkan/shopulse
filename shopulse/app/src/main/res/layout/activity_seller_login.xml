@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Sellers.SellerLoginActivity">
+
+    <ImageView
+        android:id="@+id/img_satici"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:src="@drawable/logo"
+        android:scaleType="centerCrop"
+        />
+
+    <TextView
+        android:id="@+id/title_satici"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Satıcı Giriş Sayfası"
+        android:gravity="center"
+        android:layout_below="@+id/img_satici"
+        android:layout_marginTop="50dp"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:textColor="@android:color/holo_green_dark"
+        />
+
+    <EditText
+        android:id="@+id/satici_giris_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/title_satici"
+        android:hint="E-Mail Adres"
+        android:inputType="textEmailAddress"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        />
+
+    <EditText
+        android:id="@+id/satici_giris_sifre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_below="@+id/satici_giris_email"
+        android:hint="Şifre"
+        android:inputType="text"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        />
+
+    <Button
+        android:id="@+id/satici_giris_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/satici_giris_sifre"
+        android:background="@android:color/holo_blue_light"
+        android:textColor="@android:color/white"
+        android:text="Giriş Yap"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        />
+
+</RelativeLayout>

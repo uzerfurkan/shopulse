@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Buyers.MainActivity">
 
 
     <ImageView
@@ -31,24 +31,6 @@
         android:textStyle="bold|italic"
         />
 
-
-    <Button
-        android:id="@+id/main_login_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/buttons"
-        android:padding="20dp"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        android:text="Bir hesabın var mı? Hemen giriş yap"
-        android:textColor="@android:color/white"
-        />
-
     <Button
         android:id="@+id/main_join_now_btn"
         android:layout_width="match_parent"
@@ -63,6 +45,38 @@
         android:textSize="18sp"
         android:text="Hemen Üye Ol"
         android:textColor="@color/colorPrimaryDark"
+        />
+
+    <Button
+        android:id="@+id/main_login_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/satici_olmak_istiyorum"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/buttons"
+        android:padding="20dp"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:text="Bir hesabın var mı? Hemen giriş yap"
+        android:textColor="@android:color/white"
+        />
+
+
+
+    <TextView
+        android:id="@+id/satici_olmak_istiyorum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Satıcı Olmak İstiyorum."
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
         />
 
 </RelativeLayout>
